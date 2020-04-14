@@ -1,0 +1,91 @@
+---
+output: 
+  pdf_document:
+    keep_tex: yes
+    fig_caption: yes
+    number_sections: yes
+geometry: margin=2.54cm
+title: "The Relationship Between Biomarkers and Exposure of Ozone and PM2.5"
+subtitle: "https://github.com/XiangtianWang/EDA_Project.git"
+author: "Xiangtian Wang"
+fontsize: 12pt
+mainfont: Times New Roman
+
+---
+
+\newpage
+\tableofcontents 
+\newpage
+\listoftables 
+\newpage
+\listoffigures 
+\newpage
+
+```{r setup, include=FALSE}
+# Set your working directory
+getwd()
+# Load your packages
+library(tidyverse)
+library(nlme)
+# Set your ggplot theme
+mytheme <- theme_classic(base_size = 14) +
+  theme(axis.text = element_text(color = "black"), 
+        legend.position = "top")
+theme_set(mytheme)
+# Load your datasets
+
+```
+```{r}
+# Gather the data
+changsha.spread <- gather(Changsha.data,"biomarker", "concentration", ohdg.a : HEHE , na.rm = TRUE)
+
+changsha.gather <- gather(changsha.spread,"exposure", "level", o3exp.12h.x : so2exp.2w.x ,na.rm = TRUE)
+colnames(changsha.gather)
+d.changsha <- changsha.gather %>%
+    mutate( d.conc = concentration[visit ==1])
+changsha <- changsha.gather %>%
+  dplyr::select(id, visit, group, biomarker, concentration, exposure, level)
+
+d.diff <- changsha %>%
+  group_by(id) %>%
+  mutate(diff.conc = concentration - concentration[visit = 1])%>%
+  mutate(diff.expo = level - level[visit = 1])
+
+# Rationale and Research Questions
+
+
+
+\newpage
+
+# Dataset Information
+
+
+
+\newpage
+
+# Exploratory Analysis 
+
+
+
+\newpage
+
+# Analysis
+
+
+
+## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
+
+## Question 2: 
+
+
+
+
+\newpage
+
+# Summary and Conclusions
+
+
+\newpage
+
+# References
+<add references here if relevant, otherwise delete this section> 
